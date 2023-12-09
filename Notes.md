@@ -183,3 +183,21 @@ function Bird(name, color) {
   this.numLegs = 2;
 }
 ```
+
+### InstanceOf operator
+
+Any time a constructor function create a new object that **object** is said to be an instance of its **constructor**.
+**instanceof** operator is a convenient way that Js provides to verify that. **instanceof** allows to compare an object to a constructor it returns **true** or **false** based on wether or not the object was created with the constructor.
+
+```js
+function Bird(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 2;
+}
+
+const albert = new Bird("Albert", "red");
+const crow = new Bird("Alexis", "black");
+
+console.log(crow instanceof Bird);
+```
