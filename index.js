@@ -4,16 +4,20 @@ function Bird(name, color) {
   this.numLegs = 2;
 }
 
-function Dog(name) {
-  this.name = name;
-  this.numLegs = 4;
+const albert = new Bird("Albert", "red");
+
+// console.log(albert.hasOwnProperty("name"));
+// console.log(albert.hasOwnProperty("numLegs"));
+// console.log(albert.hasOwnProperty("color"));
+// console.log(albert.hasOwnProperty("sayHello"));
+
+// extract own properties of albert
+
+const ownProps = [];
+for (let p in albert) {
+  if (albert.hasOwnProperty(p)) {
+    ownProps.push(p);
+  }
 }
 
-const albert = new Bird("Albert", "red");
-const sparky = new Dog("Sparky");
-
-const crow = new Bird("Alexis", "black");
-
-console.log(crow instanceof Bird);
-console.log(sparky instanceof Bird);
-console.log(crow instanceof Dog);
+console.log("albert's own properties: ", ownProps);

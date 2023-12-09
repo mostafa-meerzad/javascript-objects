@@ -201,3 +201,18 @@ const crow = new Bird("Alexis", "black");
 
 console.log(crow instanceof Bird);
 ```
+
+### Own property
+
+Object's own properties are those properties that are defined directly on the instance object.
+
+**hasOwnProperty** is a method that is called on an object instance and returns a boolean based on wether the property is directly defined on the instance object or not.
+
+```js
+instanceObject.hasOwnProperty(Constructor) >>> boolean
+```
+
+```js
+albert.hasOwnProperty("name")
+
+```
