@@ -5,5 +5,9 @@ const duck = {
 
 const dog = {
     name: "Minion",
-    numLegs: 4
+    numLegs: 4, 
+    sayName: function (){return "this dog's name is Minion"}
 }
+
+console.log(dog["name"])
+console.log(dog.sayName())
