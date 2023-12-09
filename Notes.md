@@ -129,3 +129,57 @@ The behavior of `this` can be a bit confusing, and it's important to understand 
    ```
 
 Understanding the context in which a function is called is crucial for correctly interpreting the value of `this`. It's important to note that arrow functions have a different behavior compared to regular functions in terms of `this`, and they can be particularly useful in avoiding some common pitfalls associated with `this` in JavaScript.
+
+## Constructor functions
+
+Constructors are functions that create new **objects** they define properties and behaviors that will belong to the new object.
+
+constructors are like blueprint for creating objects.
+
+```js
+function Bird() {
+  this.name = "Albert";
+  this.color = "blue";
+  this.numLegs = 2;
+}
+```
+
+### Constructor function conventions:
+
+1. constructor name must start with a Capital letter to distinguish them from normal functions.
+2. constructors use **this** keyword to set properties of the object they will create. **this** inside a constructor refers to the newly created object.
+3. constructors define properties and behaviors instead of returning a value unlike normal functions.
+
+```js
+function Dog() {
+  this.name = "Sparky";
+  this.color = "white";
+  this.numLegs = 4;
+}
+```
+
+### Create new object using a constructor
+
+```js
+function Bird() {
+  this.name = "Albert";
+  this.color = "blue";
+  this.numLegs = 2;
+}
+
+const Albert = new Bird();
+```
+
+**Note**: **new** operator is used when calling a constructor that tells javascript to create a new instance of that constructor and the **this** keyword inside constructor will point to the newly created object otherwise it may produce unexpected results.
+
+properties of the new object instance can be accessed and modified just like any other object.
+
+pass argument to constructor functions to create dynamic objects based on those values.
+
+```js
+function Bird(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 2;
+}
+```
