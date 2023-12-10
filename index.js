@@ -1,23 +1,14 @@
 function Bird(name, color) {
   this.name = name;
   this.color = color;
-  this.numLegs = 2;
+  // this.numLegs = 2; // same property automatically includes to all instances of this constructor
 }
 
-const albert = new Bird("Albert", "red");
+Bird.prototype.numLegs = 2 // numLegs property is added to Bird constructor's prototype level and is shared among all instances of this constructor
+const albert = new Bird("Albert", "blue");
+const toby = new Bird("Toby", "red");
+const tweety = new Bird("Tweety", "green");
 
-// console.log(albert.hasOwnProperty("name"));
-// console.log(albert.hasOwnProperty("numLegs"));
-// console.log(albert.hasOwnProperty("color"));
-// console.log(albert.hasOwnProperty("sayHello"));
-
-// extract own properties of albert
-
-const ownProps = [];
-for (let p in albert) {
-  if (albert.hasOwnProperty(p)) {
-    ownProps.push(p);
-  }
-}
-
-console.log("albert's own properties: ", ownProps);
+console.log(albert.numLegs);
+console.log(toby.numLegs);
+console.log(tweety.numLegs);
