@@ -240,4 +240,17 @@ const tweety = new Bird("Tweety", "green")
 ```
 
 Since all instances automatically have the properties on the prototype think of prototype as a **recipe** for creating objects. nearly every objects in Js has a **prototype** property which is part of the constructor function that created it.
- 
+
+
+### Iterate over object properties
+
+You can use a loop to iterate over properties of an object:
+
+```js
+const user = {name: "John", age:34, job:"SE", email:"john@test.com"}
+
+for(let prop in user){
+  console.log(prop) // this loop variable will represent each property of the user object 
+  console.log(user[prop]) // the value of each property
+}
+```

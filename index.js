@@ -1,14 +1,6 @@
-function Bird(name, color) {
-  this.name = name;
-  this.color = color;
-  // this.numLegs = 2; // same property automatically includes to all instances of this constructor
+const user = {name: "John", age:34, job:"SE", email:"john@test.com"}
+
+for(let prop in user){
+  console.log(prop) // this loop variable will represent each properties of the user object 
+  console.log(user[prop])
 }
-
-Bird.prototype.numLegs = 2 // numLegs property is added to Bird constructor's prototype level and is shared among all instances of this constructor
-const albert = new Bird("Albert", "blue");
-const toby = new Bird("Toby", "red");
-const tweety = new Bird("Tweety", "green");
-
-console.log(albert.numLegs);
-console.log(toby.numLegs);
-console.log(tweety.numLegs);
