@@ -272,3 +272,43 @@ function Bird(name, color) {
 const aflac = new Bird("Aflac", "blue");
 const aflacConstructor = aflac.constructor >>> Bird;
 ```
+
+## Change Prototype Property To A New Object
+
+In case of having multiple shared properties among object instances, instead of adding those props individually you can assign the constructor prototype property to a new object, this way you can add multiple properties all at once.
+
+**Note**: remember to set the constructor property to the constructor function when assigning prototype to a new object, be cause doing this erases the constructor property.
+
+```js
+function Bird(name, color) {
+  this.name = name;
+  this.color = color;
+}
+// adding props individually
+// Bird.prototype.eat = function () {
+//   return "nom nom nom";
+// };
+// Bird.prototype.describe = function(){
+// return `my name is ${this.name}`;
+// }
+// Bird.prototype.numLegs = 2
+
+// adding prototype props all at once
+Bird.prototype = {
+  constructor : Bird, 
+  eat: function () {
+    return "nom nom nom";
+  },
+  describe: function () {
+    return `my name is ${this.name}`;
+  },
+  numLegs: 2,
+};
+
+const aflac = new Bird("Aflac", "blue");
+const toby = new Bird("Toby", "green");
+const sphinx = new Bird("Sphinx", "red");
+
+console.log(aflac.numLegs);
+console.log(aflac.describe());
+```
