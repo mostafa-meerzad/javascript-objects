@@ -312,3 +312,25 @@ const sphinx = new Bird("Sphinx", "red");
 console.log(aflac.numLegs);
 console.log(aflac.describe());
 ```
+
+## Understand where an object's prototype comes from
+
+just like people inherit genes from their parents, an object inherit its prototype directly from the constructor function that created it.
+
+```js
+function Bird(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 2;
+}
+
+const duck = new Bird("Donald")
+```
+
+**duck** inherit it's prototype from the **Bird** constructor function. 
+
+shown here
+
+```js
+Bird.prototype.isPrototypeOf(duck) >>> true
+```
