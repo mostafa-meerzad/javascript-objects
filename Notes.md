@@ -295,7 +295,7 @@ function Bird(name, color) {
 
 // adding prototype props all at once
 Bird.prototype = {
-  constructor : Bird, 
+  constructor: Bird,
   eat: function () {
     return "nom nom nom";
   },
@@ -324,13 +324,33 @@ function Bird(name, color) {
   this.numLegs = 2;
 }
 
-const duck = new Bird("Donald")
+const duck = new Bird("Donald");
 ```
 
-**duck** inherit it's prototype from the **Bird** constructor function. 
+**duck** inherit it's prototype from the **Bird** constructor function.
 
 shown here
 
 ```js
-Bird.prototype.isPrototypeOf(duck) >>> true
+Bird.prototype.isPrototypeOf(duck) >>> true;
 ```
+
+## Prototype Chain
+
+all objects with (a few exceptions) have a prototype. also an objects prototype is an object which means it also has a prototype for its own!.
+
+```js
+function Bird(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 2;
+}
+
+const duck = new Bird("Donald");
+
+console.log(Bird.prototype.isPrototypeOf(duck.prototype)); // true, duck prototype is inherited from Bird prototype
+
+duck.hasOwnProperty("name");
+```
+
+the `hasOwnProperty` method is defined in `Object.prototype` which can be accessed by Bird.prototype. which can then be accessed by duck. this is an example of prototype chain. in this example `Bird` is the **superType** for `duck` and `duck` is the **subType**. `Object` is a **superType** for both `Bird` and `duck` and also `Object` is **superType** for all objects in JS, therefore any object can use `hasOwnProperty` method.
