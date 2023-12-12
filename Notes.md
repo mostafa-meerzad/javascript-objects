@@ -209,12 +209,11 @@ Object's own properties are those properties that are defined directly on the in
 **hasOwnProperty** is a method that is called on an object instance and returns a boolean based on wether the property is directly defined on the instance object or not.
 
 ```js
-instanceObject.hasOwnProperty(Constructor) >>> boolean
+instanceObject.hasOwnProperty(Constructor) >>> boolean;
 ```
 
 ```js
-albert.hasOwnProperty("name")
-
+albert.hasOwnProperty("name");
 ```
 
 ### Prototype properties
@@ -224,33 +223,52 @@ Prototype properties are those object properties that are shared among all objec
 prototype properties can be used to eliminate the repetitive properties and methods that are defined in the object-constructor thus includes in all object instances it might not be an issue if there are a few instances but if there are hundreds or thousands of instances that would be a lot of duplicated properties/methods.
 
 ```js
-
-function Bird(name, color){
+function Bird(name, color) {
   this.name = name;
   this.color = color;
   // this.numLegs = 2 // this property is not going to change in all Bird instances thus makes duplicated property.
 }
 
-Bird.prototype.numLegs = 2 // numLegs property is added to Bird constructor's prototype level and is shared among all instances of this constructor
+Bird.prototype.numLegs = 2; // numLegs property is added to Bird constructor's prototype level and is shared among all instances of this constructor
 
-const albert = new Bird("Albert", "blue")
-const toby = new Bird("Toby", "red")
-const tweety = new Bird("Tweety", "green")
-
+const albert = new Bird("Albert", "blue");
+const toby = new Bird("Toby", "red");
+const tweety = new Bird("Tweety", "green");
 ```
 
 Since all instances automatically have the properties on the prototype think of prototype as a **recipe** for creating objects. nearly every objects in Js has a **prototype** property which is part of the constructor function that created it.
-
 
 ### Iterate over object properties
 
 You can use a loop to iterate over properties of an object:
 
 ```js
-const user = {name: "John", age:34, job:"SE", email:"john@test.com"}
+const user = { name: "John", age: 34, job: "SE", email: "john@test.com" };
 
-for(let prop in user){
-  console.log(prop) // this loop variable will represent each property of the user object 
-  console.log(user[prop]) // the value of each property
+for (let prop in user) {
+  console.log(prop); // this loop variable will represent each property of the user object
+  console.log(user[prop]); // the value of each property
 }
+```
+
+### Constructor property
+
+**constructor** is a special property on object instances that references to the constructor function of which
+the object is created.
+
+you can check for the **constructor** of an object simply by accessing this property on the object instance.
+
+**the problem is that you can overwrite this property as any other properties of an object.**
+
+it is better to use `instanceof` operator
+
+```js
+function Bird(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 2;
+}
+
+const aflac = new Bird("Aflac", "blue");
+const aflacConstructor = aflac.constructor >>> Bird;
 ```
