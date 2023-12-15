@@ -354,3 +354,115 @@ duck.hasOwnProperty("name");
 ```
 
 the `hasOwnProperty` method is defined in `Object.prototype` which can be accessed by Bird.prototype. which can then be accessed by duck. this is an example of prototype chain. in this example `Bird` is the **superType** for `duck` and `duck` is the **subType**. `Object` is a **superType** for both `Bird` and `duck` and also `Object` is **superType** for all objects in JS, therefore any object can use `hasOwnProperty` method.
+
+## Use Inheritance to avoid Repeating Yourself
+
+```js
+function Bird(name) {
+  this.name = name;
+}
+
+function Dog(name) {
+  this.name = name;
+}
+
+// describe method is repeated in both Bird and Dog
+Bird.prototype = {
+  constructor: Bird,
+  describe: function () {
+    return `my name is ${this.name}`;
+  },
+};
+//
+Dog.prototype = {
+  constructor: Dog,
+  describe: function () {
+    return `my name is ${this.name}`;
+  },
+};
+```
+
+create a **super type** and place all those shared properties and methods.
+
+```js
+function Bird(name) {
+  this.name = name;
+}
+
+function Dog(name) {
+  this.name = name;
+}
+
+// create a super-type called Animal
+function Animal() {}
+
+Animal.prototype = {
+  constructor: Animal,
+  describe: function () {
+    return `my name is ${this.name}`;
+  },
+};
+```
+
+## Set the child's prototype to an Instance of Parent
+
+use `Object.create(obj)` to implement inheritance for objects.
+
+set `prototype` of **subtype** (Dog and Bird) to be an instance of (Animal):
+
+```js
+function Bird(name) {
+  this.name = name;
+}
+
+function Dog(name) {
+  this.name = name;
+}
+
+// create a super-type called Animal
+function Animal() {}
+
+Animal.prototype = {
+  constructor: Animal,
+  describe: function () {
+    return `my name is ${this.name}`;
+  },
+};
+
+// now inherit "describe" method from "Animal" super-type
+Bird.prototype = Object.create(Animal.prototype);
+Dog.prototype = Object.create(Animal.prototype);
+
+const aflac = new Bird("aflac");
+const sparky = new Dog("sparky");
+
+console.log(aflac.describe()); >> "my name is aflac"
+console.log(sparky.describe()); >> "my name is sparky"
+console.log(aflac.constructor); >> "Animal"
+console.log(sparky.constructor); >> "Animal"
+
+Bird
+```
+
+`Object.create(obj)` creates a new object and sets `obj` as the new object's `prototype`
+
+### Reset an inherited constructor property
+
+when an object inherits it's prototype from another object it also inherits the supertype's constructor property.
+
+```js
+
+function Bird(name){
+  this.name = name;
+}
+
+function Animal(){
+  this.describe = function(){
+    return `my name is ${this.name}`
+  }
+}
+
+Bird.prototype = Object.create(Animal);
+Bird.prototype.constructor = Bird
+
+```
