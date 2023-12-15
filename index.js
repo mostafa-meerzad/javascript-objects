@@ -1,52 +1,22 @@
-function Bird(name) {
-  this.name = name;
-}
-
-function Dog(name) {
-  this.name = name;
-}
-
-// describe method is repeated in both Bird and Dog
-// Bird.prototype = {
-//   constructor: Bird,
-//   describe: function () {
-//     return `my name is ${this.name}`;
-//   },
-// };
-
-// Dog.prototype = {
-//   constructor: Dog,
-//   describe: function () {
-//     return `my name is ${this.name}`;
-//   },
-// };
-
-// create a super-type called Animal
 function Animal() {}
-
 Animal.prototype = {
-  constructor: Animal,
-  describe: function () {
-    return `my name is ${this.name}`;
+  eat: function () {
+    return "nom nom nom";
   },
 };
 
-// now inherit "describe" method from "Animal" super-type
+function Bird() {}
+
 Bird.prototype = Object.create(Animal.prototype);
-Dog.prototype = Object.create(Animal.prototype);
-// Note: when an object inherit it's prototype form a "supertype" it also inherits it's "supertype's" constructor property due to this if you check the "constructor" property of "subtype" it will point to the "supertype"
-const aflac = new Bird("aflac");
-const sparky = new Dog("sparky");
+Bird.prototype.constructor = Bird;
+// in addition to the properties inherited from Animal you can add properties/methods that are unique to Bird constructor
 
-console.log(aflac.describe());
-console.log(sparky.describe());
+Bird.prototype.fly = function () {
+  return "I'm flying!";
+};
 
-console.log(sparky.constructor); // >> Animal
-console.log(aflac.constructor); // >> Animal
+const aflac = new Bird();
 
-// set the constructor property manually
-Bird.prototype.constructor = Bird
-Dog.prototype.constructor = Dog
-
-console.log(sparky.constructor); // >> Dog
-console.log(aflac.constructor); // >> Bird
+console.log(aflac.fly());
+console.log(aflac.eat());
+console.log(Bird.prototype.isPrototypeOf(aflac));

@@ -208,8 +208,10 @@ Object's own properties are those properties that are defined directly on the in
 
 **hasOwnProperty** is a method that is called on an object instance and returns a boolean based on wether the property is directly defined on the instance object or not.
 
+properties defined in the constructor function become **own-properties** of the instance objects.
+
 ```js
-instanceObject.hasOwnProperty(Constructor) >>> boolean;
+instanceObject.hasOwnProperty(property) >>> boolean;
 ```
 
 ```js
@@ -451,18 +453,44 @@ Bird
 when an object inherits it's prototype from another object it also inherits the supertype's constructor property.
 
 ```js
-
-function Bird(name){
+function Bird(name) {
   this.name = name;
 }
 
-function Animal(){
-  this.describe = function(){
-    return `my name is ${this.name}`
-  }
+function Animal() {
+  this.describe = function () {
+    return `my name is ${this.name}`;
+  };
 }
 
 Bird.prototype = Object.create(Animal);
-Bird.prototype.constructor = Bird
+Bird.prototype.constructor = Bird;
+```
 
+## Add properties after inheritance
+
+A constructor function can inherit it's prototype from a `supertype` constructor function can still have it's own properties in addition to inherited properties.
+
+```js
+function Animal() {}
+Animal.prototype = {
+  eat: function () {
+    return "nom nom nom";
+  },
+};
+
+function Bird() {}
+
+Bird.prototype = Object.create(Animal.prototype);
+Bird.prototype.constructor = Bird;
+// in addition to the properties inherited from Animal you can add properties/methods that are unique to Bird constructor
+
+Bird.prototype.fly = function () {
+  return "I'm flying!";
+};
+
+const aflac = new Bird();
+
+console.log(aflac.fly());
+console.log(aflac.eat());
 ```
