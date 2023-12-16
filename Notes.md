@@ -574,3 +574,12 @@ plane.fly();
 // The console would display the string Flying, wooosh! twice, once for each fly() call.
 // Note how the mixin allows for the same fly method to be reused by unrelated objects bird and plane
 ```
+
+## Use closure to protect properties within an object from being modified externally
+
+Until now all the properties in objects were public and could be accessed and assigned to new values, which is not good for all purposes.
+
+The simplest way to make public properties private is by creating a **variable** within the constructor function. this changes the scop of the variable to be within the constructor function vs globally. this way the variables can only be accessed and changed by the methods also withing the constructor function.
+
+**Note**: In javascript a function always has access to the context in which it was created. this is called **closure**.
+

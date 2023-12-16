@@ -1,26 +1,31 @@
-let flyMixin = function (obj) {
-  obj.fly = function () {
-    console.log("Flying, wooosh!");
-  };
-};
-// both way flyMixin works
-function Bird(name) {
+
+function Dog(name)
+{
   this.name = name;
-  this.numLegs = 2;
+  this.numLegs = 4
 }
 
-// let bird = {
-//   name: "Donald",
-//   numLegs: 2,
-// };
+const sparky = new Dog("Sparky")
+console.log(sparky.name)
+console.log(sparky.numLegs)
 
-let bird = new Bird("Donald");
-let plane = {
-  model: "777",
-  numPassengers: 524,
-};
+// overwrite numLegs property
+sparky.numLegs = 3
+console.log(sparky.numLegs)
+console.log()
+// restrict the properties scope
+function Bird(){
+  let hatchedEgg = 10
 
-flyMixin(bird);
-flyMixin(plane);
-bird.fly();
-plane.fly();
+  this.getHatchedEggCount = function(){
+    return hatchedEgg
+  }
+}
+
+const duck = new Bird()
+console.log(duck.getHatchedEggCount())
+// if you try to overwrite a property after restricting it's scope you just end up with adding a new property instead of overwriting the object's property.
+
+duck.hatchedEgg = 100
+console.log(duck.getHatchedEggCount())
+console.log(duck.hatchedEgg)
