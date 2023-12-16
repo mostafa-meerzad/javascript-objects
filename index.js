@@ -15,6 +15,10 @@ Bird.prototype.fly = function () {
   return "I'm flying!";
 };
 
+Bird.prototype.eat = function () {
+  return "Bird is eating: peck peck peck"
+}
+
 const aflac = new Bird();
 
 console.log(aflac.fly());

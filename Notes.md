@@ -494,3 +494,44 @@ const aflac = new Bird();
 console.log(aflac.fly());
 console.log(aflac.eat());
 ```
+
+## Overwrite inherited properties
+
+It is possible to overwrite an inherited property, it is done the same way as adding a property to the **ChildObject.prototype** using the same name as the inherited property.
+
+here is an example of **Bird** overwriting **eat()** method inherited from **Animal**
+
+```js
+function Animal() {}
+Animal.prototype = {
+  eat: function () {
+    return "nom nom nom";
+  },
+};
+
+function Bird() {}
+
+Bird.prototype = Object.create(Animal.prototype);
+Bird.prototype.constructor = Bird;
+// in addition to the properties inherited from Animal you can add properties/methods that are unique to Bird constructor
+
+Bird.prototype.fly = function () {
+  return "I'm flying!";
+};
+
+Bird.prototype.eat = function () {
+  return "Bird is eating: peck peck peck";
+};
+
+const duck = new Bird();
+
+console.log(duck.fly());
+console.log(duck.eat());
+```
+
+this is how JS looks for the **eat** method in the prototype chain
+
+1. **duck** => is **eat()** defined here?: No
+2. **Bird** => is **eat()** defined here?: Yes, execute it and stop searching
+3. **Animal** => is **eat()** is also defined here, but JS stop searching before reaching here
+4. **Object** => javascript stop searching before reaching this level
