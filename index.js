@@ -1,26 +1,26 @@
-function Animal() {}
-Animal.prototype = {
-  eat: function () {
-    return "nom nom nom";
-  },
+let flyMixin = function (obj) {
+  obj.fly = function () {
+    console.log("Flying, wooosh!");
+  };
 };
-
-function Bird() {}
-
-Bird.prototype = Object.create(Animal.prototype);
-Bird.prototype.constructor = Bird;
-// in addition to the properties inherited from Animal you can add properties/methods that are unique to Bird constructor
-
-Bird.prototype.fly = function () {
-  return "I'm flying!";
-};
-
-Bird.prototype.eat = function () {
-  return "Bird is eating: peck peck peck"
+// both way flyMixin works
+function Bird(name) {
+  this.name = name;
+  this.numLegs = 2;
 }
 
-const aflac = new Bird();
+// let bird = {
+//   name: "Donald",
+//   numLegs: 2,
+// };
 
-console.log(aflac.fly());
-console.log(aflac.eat());
-console.log(Bird.prototype.isPrototypeOf(aflac));
+let bird = new Bird("Donald");
+let plane = {
+  model: "777",
+  numPassengers: 524,
+};
+
+flyMixin(bird);
+flyMixin(plane);
+bird.fly();
+plane.fly();
